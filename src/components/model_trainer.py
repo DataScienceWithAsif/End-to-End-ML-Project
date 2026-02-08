@@ -15,7 +15,7 @@ from sklearn.metrics import r2_score
 
 from src.exception import CustomException
 from src.logger import logging
-from src.utils import save_object, evaluate_models
+from src.utils import save_object, evaluate_models, return_model_params
 
 @dataclass
 class ModelTrainerConfig:
@@ -43,8 +43,8 @@ class ModelTrainer:
                 "Random_forest_regressor":RandomForestRegressor(),
                 "AdaBoostRegressor":AdaBoostRegressor()
             }
-            
-            model_result_report:dict=evaluate_models(x_train,y_train,x_test,y_test, models)
+            params = return_model_params()
+            model_result_report:dict=evaluate_models(x_train,y_train,x_test,y_test, models, params)
             
             best_r2_score = max(sorted(model_result_report.values()))
             
@@ -56,7 +56,7 @@ class ModelTrainer:
             if best_r2_score <.6:
                 raise CustomException("Not best model found",sys)
                 logging.info("Best model not found")
-            logging.info("best r2_scored model found which is {}".format(best_model_name))
+            logging.info("best r2_scored model found after hyper-tuning which is {}".format(best_model_name))
             
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
