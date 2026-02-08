@@ -12,3 +12,5 @@ I initially attempted to deploy this using **AWS CodePipeline** and **Elastic Be
 
 ### Hugging Face (Live)
 To ensure the application was accessible while AWS debugging continues, I containerized the application using **Docker** and deployed it to **Hugging Face Spaces**.
+
+**Special Thanks:** Huge thanks to [@krishnaik06](https://github.com/krishnaik06) for the guidance so far. If anyone (including the legend himself!) has encountered this specific pipeline error while following the modular deployment flow, I’d love to connect and resolve this.
